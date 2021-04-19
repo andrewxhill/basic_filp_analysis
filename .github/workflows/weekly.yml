@@ -16,5 +16,4 @@ jobs:
         with:
           perl-version: '5.32'
       - run: perl -V
-      - run: cpanm --installdeps .
       - run: ./regenerate_stats.pl
