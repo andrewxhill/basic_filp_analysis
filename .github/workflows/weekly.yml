@@ -1,7 +1,6 @@
 name: weekly
     
 on:
-  pull_request:
   schedule:
     - cron: "0 0 * * 0" 
     
@@ -17,3 +16,7 @@ jobs:
           perl-version: '5.32'
       - run: perl -V
       - run: ./regenerate_stats.pl
+      - name: commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Weekly stats update
