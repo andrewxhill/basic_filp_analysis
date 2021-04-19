@@ -1,0 +1,22 @@
+name: weekly
+    
+on:
+  schedule:
+    - cron: "0 0 * * 0" 
+    
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner.
+      - uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: '5.32'
+      - run: perl -V
+      - run: ./regenerate_stats.pl
+      - name: commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Weekly stats update
